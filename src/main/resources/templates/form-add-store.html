@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOBAXIXIXI</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"/>
+  <object th:include="fragments/fragment :: js" th:remove="tag"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Store')"/>
+<div class="cont-forms">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2>Add Store</h2>
+        <br>
+        <form th:action="@{/store/add}" th:object="${store}" method="POST">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              Store name : <br>
+              <input required class="form-control" th:field="*{name}" type="text" name="name" placeholder="Store name"/>
+            </div>
+            <div class="form-group col-md-6">
+              Manager : <br>
+              <span>
+                <select class="custom-select" th:field="*{manager.id}" id="manager" required="required">
+                  <option th:each="manager : ${listManager}" th:value="${manager.id}" th:text="${manager.fullName}"/>
+                </select>
+            </span>
+            </div>
+          </div>
+          <br><br>
+
+          Address : <br>
+          <textarea required class="form-control" th:field="*{address}" type="text" name="address" placeholder="Address"/>
+          <br><br>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              Open Hour : <br>
+              <input required class="form-control" th:field="*{openHour}" type="time" name="openHour"/>
+            </div>
+            <div class="form-group col-md-6">
+              Close Hour : <br>
+              <input required class="form-control" th:field="*{closeHour}" type="time" name="closeHour"/>
+            </div>
+          </div>
+          <br><br>
+
+          <button class="btn btn-primary" type="submit">Save</button>
+          <a class="btn btn-outline-danger" th:href="@{/store}">Cancel</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"/>
+</body>
+</html>

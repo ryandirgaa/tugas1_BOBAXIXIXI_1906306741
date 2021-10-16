@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOBAXIXIXI</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"/>
+  <object th:include="fragments/fragment :: js" th:remove="tag"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Store')"/>
+<div class="cont-lists">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2>Store Detail</h2>
+        <br><br>
+        <div class="row">
+          <div class="col-md-7">
+            <p class="font-weight-bold" style="line-height: 1.5vh">Store Name :</p>
+            <p th:text="${store.name}"></p>
+          </div>
+          <div class="col-md-5">
+            <p class="font-weight-bold" style="line-height: 1.5vh">Store Code :</p>
+            <p th:text="${store.storeCode}"></p>
+          </div>
+        </div>
+        <br>
+        <p class="font-weight-bold" style="line-height: 1.5vh">Address :</p>
+        <p th:text="${store.address}"></p>
+        <br>
+        <p class="font-weight-bold" style="line-height: 1.5vh">Open Hour :</p>
+        <p th:text="${store.openHour}"></p>
+        <br>
+        <p class="font-weight-bold" style="line-height: 1.5vh">Close Hour :</p>
+        <p th:text="${store.closeHour}"></p>
+        <br>
+        <p class="font-weight-bold" style="line-height: 1.5vh">Manager :</p>
+        <p th:text="${store.manager.fullName}"></p>
+
+      </div>
+      <div th:if="*{listStoreBoba.size() != 0}" class="overflow-auto cont-sublists">
+        <h3>List Boba Tea</h3>
+        <table class="table text-center">
+          <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Topping</th>
+            <th>Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="strBoba, iterationStatus : ${listStoreBoba}"
+              th:style="${iterationStatus.even} ? 'background:#f0f0f0;'">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${strBoba.bobaTea.name}"></td>
+            <td th:text="${strBoba.bobaTea.topping.name}"></td>
+            <td th:text="${strBoba.bobaTea.price}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div th:unless="*{listStoreBoba.size() != 0}" class="cont-sublists">
+        <h3 th:text="'There is no boba tea in this store'"></h3>
+      </div>
+      <div class="text-md-center btnadd">
+        <a class="btn btn-primary" th:href="@{/store/} + ${store.id} + '/assign-boba'">Add boba to store</a>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"/>
+</body>
+</html>

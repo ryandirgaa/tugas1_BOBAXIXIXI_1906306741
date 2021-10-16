@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"/>
+    <object th:include="fragments/fragment :: js" th:remove="tag"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Store')"/>
+<div class="cont-lists">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <h2>List of Store</h2>
+            <br>
+            <a class="btn btn-warning" th:href="@{/store/add}">+ Add Store</a>
+            <div th:if="*{listStore.size() != 0}" class="overflow-auto">
+                <table class="table text-center">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Store Code</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Operational Hour</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="store, iterationStatus : ${listStore}"
+                        th:style="${iterationStatus.even} ? 'background:#f0f0f0;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${store.storeCode}"></td>
+                        <td th:text="${store.name}"></td>
+                        <td th:text="${store.address}"></td>
+                        <td th:text="${store.openHour} + '-' + ${store.closeHour}"></td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-primary" th:href="@{/store/} + ${store.id}">View</a>
+                                <a class="btn btn-warning" th:href="@{/store/update/} + ${store.id}">Update</a>
+                                <a class="btn btn-danger" th:href="@{/store/delete/} + ${store.id}">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="*{listStore.size() != 0}">
+                <h3 th:text="'There is no store'"></h3>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"/>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"/>
+    <object th:include="fragments/fragment :: js" th:remove="tag"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Boba Tea')"/>
+<div class="cont-forms">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Add Boba Tea</h2>
+                <br>
+                <form th:action="@{/boba/add}" th:object="${bobaTea}" method="POST">
+                    Name : <br>
+                    <input required class="form-control" th:field="*{name}" type="text" name="name"/>
+                    <br><br>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Price : <br>
+                            <input required class="form-control" th:field="*{price}" type="text" name="price"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            Size : <br>
+                            <select class="custom-select" th:field="*{size}" id="size" required="required">
+                                <option value="0">S</option>
+                                <option value="1">M</option>
+                                <option value="2">L</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Ice : <br>
+                            <select class="custom-select" th:field="*{iceLevel}" id="iceLevel" required="required">
+                                <option value="0">Less</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Extra</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            Sugar : <br>
+                            <select class="custom-select" th:field="*{sugarLevel}" id="sugarLevel" required="required">
+                                <option value="0">Less</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Extra</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    Topping : <br>
+                    <span>
+                        <select class="custom-select" th:field="*{topping.id}" id="topping" required="required">
+                            <option th:each="topping : ${listTopping}" th:value="${topping.id}" th:text="${topping.name}"/>
+                        </select>
+                    </span>
+                    <br><br><br>
+
+                    <button class="btn btn-primary" type="submit">Save</button>
+                    <a class="btn btn-outline-danger" th:href="@{/boba}">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"/>
+</body>
+</html>

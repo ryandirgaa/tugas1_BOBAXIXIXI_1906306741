@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOBAXIXIXI</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"/>
+  <object th:include="fragments/fragment :: js" th:remove="tag"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('')"/>
+<div class="cont-forms">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2 th:text="'Add store to ' + ${bobaTea.name}"></h2>
+        <br>
+        <form th:action="@{/boba/} + ${bobaTea.id} + '/assign-store/'" th:object="${storeBoba}" method="POST">
+          <input type="hidden" th:field="*{id}" />
+          <div class="overflow-auto">
+            <table class="table text-center">
+              <thead>
+              <tr>
+                <th></th>
+                <th>Store Code</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Operational Hour</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="store, iterationStatus : ${listStore}"
+                  th:style="${iterationStatus.even} ? 'background:#f0f0f0;'">
+                <td>
+                  <div class="custom-control custom-checkbox text-center">
+                    <input class="form-check-input" type="checkbox"
+                           th:field="*{store}" th:value="${store.id}"
+                           id="flexCheckDefault">
+                  </div>
+                </td>
+                <td th:text="${store.storeCode}"></td>
+                <td th:text="${store.name}"></td>
+                <td th:text="${store.address}"></td>
+                <td th:text="${store.openHour} + '-' + ${store.closeHour}"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <br><br>
+
+          <input type="submit" value="Confirm" class="btn btn-primary">
+          <a class="btn btn-outline-danger" th:href="@{/boba}">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"/>
+</body>
+</html>

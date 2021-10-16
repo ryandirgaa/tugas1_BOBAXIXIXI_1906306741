@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"/>
+    <object th:include="fragments/fragment :: js" th:remove="tag"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('')"/>
+<div class="background text-white">
+    <div class="row">
+        <div class="col-sm">
+            <h1>Welcome to BOBAXIXIXI !</h1>
+            <p>Here you will get various information about the boba shop and available boba tea lists.</p>
+        </div>
+        <div class="col-sm right">
+            <img th:src="@{/img/bobabg.png}">
+        </div>
+    </div>
+</div>
+<div class="featurelist">
+    <div class="container">
+        <h2>List of Features</h2>
+        <div class="row text-center">
+            <div class="col-sm">
+                <div class="card">
+                    <img th:src="@{/img/store.svg}">
+                    <div class="card-body">
+                        <h5 class="card-title">Store</h5>
+                        <a th:href="@{/store}" class="btn btn-primary">Visit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <img th:src="@{/img/bobatea.svg}">
+                    <div class="card-body">
+                        <h5 class="card-title">Boba Tea</h5>
+                        <a href="@{/boba}" class="btn btn-primary">Visit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <img th:src="@{/img/search.svg}">
+                    <div class="card-body">
+                        <h5 class="card-title">Search</h5>
+                        <a th:href="@{/search}" class="btn btn-primary">Visit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <img th:src="@{/img/filter.svg}">
+                    <div class="card-body">
+                        <h5 class="card-title">Filter</h5>
+                        <a href="#" class="btn btn-primary">Visit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"/>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    </head>
+    <head th:fragment="js">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
+                crossorigin="anonymous">
+        </script>
+        <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+    </head>
+</head>
+<body>
+<nav th:fragment="navbar(page)" id="navbar-example2" class="navbar">
+    <a class="navbar-brand" href="/">BOBAXIXIXI</a>
+    <ul class="nav nav-pills">
+        <li th:classappend="${page == 'Store'} ? active : ''" class="nav-item">
+            <a class="nav-link" href="/store">Store</a>
+        </li>
+        <li th:classappend="${page == 'Boba Tea'} ? active : ''" class="nav-item">
+            <a class="nav-link" href="/boba">Boba Tea</a>
+        </li>
+        <li th:classappend="${page == 'Search'} ? active : ''" class="nav-item">
+            <a class="nav-link" href="/search">Search</a>
+        </li>
+        <li th:classappend="${page == 'Filter'} ? active : ''" class="nav-item">
+            <a class="nav-link" href="/">Filter</a>
+        </li>
+    </ul>
+</nav>
+<footer th:fragment="footer" id="sticky-footer" class="flex-shrink-0 py-4 text-white">
+    <div class="container text-center">
+        <small>Copyright &copy; 2021 <span>BOBAXIXIXI</span>. All rights reserved</small>
+    </div>
+</footer>
+</body>
+</html>

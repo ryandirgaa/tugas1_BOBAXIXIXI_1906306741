@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    font-family: 'Work Sans', sans-serif;
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+body{
+    background: #ffe6c8;
+}
+h1{
+    font-size: 72px;
+    font-weight: 700;
+}
+h2{
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+    color: #38280e;
+}
+h3{
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: #38280e;
+}
+p{
+    font-size: 20px;
+    font-weight: 400;
+}
+small{
+    font-size: 14px;
+}
+thead{
+    background: #38280e;
+    color: #ffffff;
+}
+.btn-warning{
+    color: #ffffff;
+}
+.btn-warning:hover{
+    color: #ffffff;
+}
+.navbar{
+    padding: 1.5vh 10vw;
+    background: #38280e;
+}
+.navbar-brand{
+    font-weight: 800;
+}
+.navbar-brand:hover, .nav-link:hover{
+    color: #ffe6c8;
+    transition: 0.3s;
+}
+.active{
+    font-weight: 700;
+}
+.navbar-brand, .nav-link{
+    color: #ffffff;
+}
+.background{
+    padding: 22.5vh 10vw;
+    background: #38280e;
+    /*border-bottom-right-radius: 100%;*/
+}
+.right img{
+    display: block;
+    margin-top: -10vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
+    height: 60vh;
+}
+.featurelist, .main{
+    padding: 15vh 5vw;
+}
+.featurelist .row{
+    margin-top: 10vh;
+}
+.featurelist .row .col-sm .card{
+    background: none;
+    border: none;
+    margin: 4vh 2vw;
+}
+.featurelist .row .col-sm .card img{
+    width: 22.5vmin;
+    height: 22.5vmin;
+    margin: auto;
+}
+.featurelist .row .col-sm .card .card-body .btn, form .btn-primary, .btnadd .btn-primary{
+    background: #d99106;
+    border: none;
+}
+.cont-lists{
+    padding: 10vh 10vw;
+}
+.cont-lists .btn{
+    margin: 0 0.5vw;
+}
+.cont-forms{
+    padding: 10vh 20vw;
+}
+.cont-forms .btn{
+    margin-right: 0.5vw;
+}
+.cont-resp{
+    padding: 20vh 20vw;
+}
+.cont-sublists{
+    padding: 5vh 10vw;
+}
+.table{
+    margin-top: 5vh;
+}
+.button-back{
+    color: #d99106;
+}
+.button-back:hover{
+    color: #d99106;
+    transition: 0.3s;
+}
+footer{
+    background: #38280e;
+}
+footer .container small span{
+    font-weight: 800;
+}
+
+@media screen and (max-width: 1100px){
+    .navbar{
+        padding: 1.5vh 5vw;
+    }
+    .background{
+        padding: 22.5vh 5vw;
+    }
+    .featurelist, .main{
+        padding: 15vh 2.5vw;
+    }
+    .right img{
+        margin-top: 0vh;
+        width: 70vw;
+        height: 60vh;
+    }
+    .cont-lists{
+        padding: 10vh 5vw;
+    }
+    .cont-forms{
+        padding: 10vh 10vw;
+    }
+    .cont-resp{
+        padding: 20vh 10vw;
+    }
+}
+@media screen and (max-width: 560px){
+    h1{
+        font-size: 48px;
+    }
+    h2{
+        font-size: 36px;
+    }
+    p{
+        font-size: 16px;
+    }
+    .right img{
+        margin-top: 0vh;
+        width: 90vw;
+        height: 50vh;
+    }
+}
