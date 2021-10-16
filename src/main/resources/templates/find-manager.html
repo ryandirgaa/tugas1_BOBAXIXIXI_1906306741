@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"/>
+    <object th:include="fragments/fragment :: js" th:remove="tag"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Filter')"/>
+<div class="cont-forms">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Find Available Manager by Boba Tea</h2>
+                <br>
+                <form th:action="@{/filter/manager}" method="GET">
+                    <div class="row text-md-center">
+                        <div class="col-md-5">
+                            <select name="idBobaTea" class="form-control">
+                                <option value=0>--Select Boba Tea Name--</option>
+                                <option th:each="boba : ${listBobaTea}"
+                                        th:value="${boba.id}"
+                                        th:utext="${boba.name}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type = "submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table text-md-center">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="manager, iterator : ${managerResultList}">
+                            <td th:text="${iterator.count}"></td>
+                            <td th:text="${manager.fullName}"></td>
+
+                            <td th:if="${manager.gender} == 0">Female</td>
+                            <td th:if="${manager.gender} == 1">Male</td>
+
+                            <td th:text="${manager.date_of_birth}"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<footer th:replace="fragments/fragment :: footer"/>
+</body>
+</html>

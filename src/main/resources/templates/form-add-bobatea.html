@@ -60,6 +60,7 @@
                     Topping : <br>
                     <span>
                         <select class="custom-select" th:field="*{topping.id}" id="topping" required="required">
+                            <option th:value=null th:text="'--Select Topping--'"/>
                             <option th:each="topping : ${listTopping}" th:value="${topping.id}" th:text="${topping.name}"/>
                         </select>
                     </span>

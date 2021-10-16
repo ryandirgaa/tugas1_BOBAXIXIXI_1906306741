@@ -61,7 +61,6 @@ thead{
 .background{
     padding: 22.5vh 10vw;
     background: #38280e;
-    /*border-bottom-right-radius: 100%;*/
 }
 .right img{
     display: block;
@@ -90,6 +89,10 @@ thead{
 .featurelist .row .col-sm .card .card-body .btn, form .btn-primary, .btnadd .btn-primary{
     background: #d99106;
     border: none;
+}
+.featurelist .row .col-sm .card .card-body .btn:hover, form .btn-primary:hover, .btnadd .btn-primary:hover{
+    background: #a46f00;
+    transition: 0.3s;
 }
 .cont-lists{
     padding: 10vh 10vw;

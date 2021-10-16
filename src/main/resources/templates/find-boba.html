@@ -16,22 +16,24 @@
             <div class="justify-content-center">
                 <h2>Find Available Boba Variant by Topping</h2>
                 <br>
-                <form th:action="@{/search}" th:object="${boba}"method="GET">
-                    <div class="row">
+                <form th:action="@{/search}" method="GET">
+                    <div class="row text-md-center">
                         <div class="col-md-5">
-<!--                            Boba Name : <br>-->
-                            <select class="browser-default custom-select" name="name" th:field="*{id}">
-                                <option th:value ="0">--Select Boba Tea Name--</option>
+                            <select name="idBobaTea" class="form-control">
+                                <option value=0>--Select Boba Tea Name--</option>
                                 <option th:each="boba : ${listBobaTea}"
-                                        th:value="${boba.id}" th:utext="${boba.name}"/>
+                                        th:value="${boba.id}"
+                                        th:utext="${boba.name}">
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-5">
-<!--                            Topping name : <br>-->
-                            <select class="browser-default custom-select" name="topping" >
-                                <option th:value ="0">--Select Topping Name--</option>
+                            <select name="idTopping" class="form-control">
+                                <option value=0>--Select Topping Name--</option>
                                 <option th:each="topping : ${listTopping}"
-                                        th:value="${topping.id}" th:utext="${topping.name}"/>
+                                        th:value="${topping.id}"
+                                        th:utext="${topping.name}">
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -40,49 +42,46 @@
                     </div>
                 </form>
 
-                <div th:if="${hasSelect}">
-                    <div th:if="${hasBoba}">
-                        <table class="table text-center">
-                            <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Price</th>
-                                <th>Size</th>
-                                <th>Ice</th>
-                                <th>Sugar</th>
-                                <th>Store Name</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="boba, iterationStatus : ${bobaTeaList}">
-                                <td th:text="${iterationStatus.count}"></td>
-                                <td th:text="${boba.price}"></td>
+                <table class="table text-md-center">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Price</th>
+                        <th>Size</th>
+                        <th>Ice</th>
+                        <th>Sugar</th>
+                        <th>Store Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div th:each="boba, iterator : ${bobaResultList}">
+                        <tr th:each="storeBoba, iterator : ${boba.listStoreBoba}">
+                            <td th:text="${iterator.count}"></td>
+                            <td th:text="${boba.price}"></td>
 
-                                <td th:if="${boba.size} == 0">S</td>
-                                <td th:if="${boba.size} == 1">M</td>
-                                <td th:if="${boba.size} == 2">L</td>
+                            <td th:if="${boba.size} == 0">S</td>
+                            <td th:if="${boba.size} == 1">M</td>
+                            <td th:if="${boba.size} == 2">L</td>
 
-                                <td th:if="${boba.iceLevel} == 0">Less</td>
-                                <td th:if="${boba.iceLevel} == 1">Normal</td>
-                                <td th:if="${boba.iceLevel} == 2">Extra</td>
+                            <td th:if="${boba.iceLevel} == 0">Less</td>
+                            <td th:if="${boba.iceLevel} == 1">Normal</td>
+                            <td th:if="${boba.iceLevel} == 2">Extra</td>
 
-                                <td th:if="${boba.sugarLevel} == 0">Less</td>
-                                <td th:if="${boba.sugarLevel} == 1">Normal</td>
-                                <td th:if="${boba.sugarLevel} == 2">Extra</td>
+                            <td th:if="${boba.sugarLevel} == 0">Less</td>
+                            <td th:if="${boba.sugarLevel} == 1">Normal</td>
+                            <td th:if="${boba.sugarLevel} == 2">Extra</td>
 
-                                <td th:text="${boba.listStoreBoba}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            <td th:text="${storeBoba.store.name}"></td>
+                        </tr>
                     </div>
-                    <div th:unless="${hasBoba}">
-                        <br><br>
-                        <h3 th:text="'No Boba Tea'"></h3>
-                    </div>
+
+                    </tbody>
+                </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<footer th:replace="fragments/fragment :: footer"/>
 </body>
 </html>

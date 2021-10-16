@@ -14,24 +14,22 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center text-md-center">
-                <h2 th:text="'Store is successfully updated for ' + ${bobaName}"></h2>
-                <a class="btn btn-primary" th:href="@{/boba}">Kembali</a>
+                <h2 th:text="'Store is successfully updated for ' + ${bobaTea.name}"></h2>
+                <a class="button-back" th:href="@{/boba}">Back to boba list</a>
             </div>
             <table class="table text-center">
                 <thead>
                 <tr>
                     <th>No</th>
                     <th>Name</th>
-                    <th>Topping</th>
-                    <th>Price</th>
+                    <th>Address</th>
                     <th>Operational Hour</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="strBoba, iterationStatus : ${listStoreBoba}"
+                <tr th:each="strBoba, iterationStatus : ${storeBobaTea}"
                     th:style="${iterationStatus.even} ? 'background:#f0f0f0;'">
                     <td th:text="${iterationStatus.count}"></td>
-                    <td th:text="${strBoba.store.storeCode}"></td>
                     <td th:text="${strBoba.store.name}"></td>
                     <td th:text="${strBoba.store.address}"></td>
                     <td th:text="${strBoba.store.openHour} + '-' + ${strBoba.store.closeHour}"></td>

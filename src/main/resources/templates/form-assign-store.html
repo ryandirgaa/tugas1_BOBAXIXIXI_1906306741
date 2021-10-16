@@ -30,15 +30,8 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="store, iterationStatus : ${listStore}"
-                  th:style="${iterationStatus.even} ? 'background:#f0f0f0;'">
-                <td>
-                  <div class="custom-control custom-checkbox text-center">
-                    <input class="form-check-input" type="checkbox"
-                           th:field="*{store}" th:value="${store.id}"
-                           id="flexCheckDefault">
-                  </div>
-                </td>
+              <tr th:each="store, iterationStatus : ${listStore}">
+                <td><input type="checkbox" th:field="*{store}" th:value="${store.id}"/></td>
                 <td th:text="${store.storeCode}"></td>
                 <td th:text="${store.name}"></td>
                 <td th:text="${store.address}"></td>

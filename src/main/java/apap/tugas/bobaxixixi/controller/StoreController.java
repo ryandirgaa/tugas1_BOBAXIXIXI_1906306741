@@ -177,8 +177,6 @@ public class StoreController {
         StoreModel store = storeService.getStoreByIdStore(id);
 
         StoreBobaTeaModel storeBoba = new StoreBobaTeaModel();
-        store.setListStoreBoba(new ArrayList<>());
-        store.getListStoreBoba().add(storeBoba);
 
         List<BobaTeaModel> listBobaTea = bobaTeaService.getBobaTeaList();
 
@@ -190,49 +188,56 @@ public class StoreController {
     }
 
     @PostMapping("/store/{id}/assign-boba")
-    public String assignBobaTeaSubmit(@PathVariable Long id, @ModelAttribute StoreBobaTeaModel storeBoba, Model model) {
+    public String assignBobaTeaSubmit(
+            @PathVariable Long id,
+            @ModelAttribute StoreBobaTeaModel storeBoba,
+            @RequestParam(value = "bobaTea") List<Long> bobaTeaIdList,
+            Model model) {
+
         StoreModel store = storeService.getStoreByIdStore(id);
-        BobaTeaModel bobaTea = storeBoba.getBobaTea();
 
-        storeBoba.setStore(store);
+        List<BobaTeaModel> bobaTeaList = new ArrayList<>();
 
-        List<StoreBobaTeaModel> listStoreBoba = store.getListStoreBoba();
+        for (int i = 0; i < bobaTeaIdList.size(); i++) {
+            StoreBobaTeaModel storeBobaTea = new StoreBobaTeaModel();
+            storeBobaTea.setStore(store);
+            storeBobaTea.setBobaTea(bobaTeaService.getBobaTeaByIdBobaTea(bobaTeaIdList.get(i)));
 
-        for (int i = 0; i < listStoreBoba.size(); i++) {
-            System.out.println(listStoreBoba.get(i).getBobaTea().getName());
+            String fstChar = "PC";
+
+            String scdChar = "";
+            if(storeBobaTea.getStore().getId() < 10){
+                scdChar = "00" + Long.toString(storeBobaTea.getStore().getId());
+            }
+            else if(storeBobaTea.getStore().getId() >= 10 && storeBobaTea.getStore().getId() < 100){
+                scdChar = "0" + Long.toString(storeBobaTea.getStore().getId());
+            }
+
+            String thdChar = "";
+            if(storeBobaTea.getBobaTea().getTopping() == null) thdChar = "0";
+            else thdChar = "1";
+
+            String lstChar = "";
+            if(storeBobaTea.getBobaTea().getId() < 10){
+                lstChar = "00" + Long.toString(storeBobaTea.getBobaTea().getId());
+            }
+            else if(storeBobaTea.getBobaTea().getId() >= 10 && storeBobaTea.getBobaTea().getId() < 100){
+                lstChar = "0" + Long.toString(storeBobaTea.getBobaTea().getId());
+            }
+
+            String code = fstChar + scdChar + thdChar + lstChar;
+
+            storeBobaTea.setProductionCode(code);
+
+            storeBobaService.addStoreBoba(storeBobaTea);
         }
-
-        String fstChar = "PC";
-
-        String scdChar = "";
-        if(store.getId() < 10){
-            scdChar = "00" + Long.toString(store.getId());
-        }
-        else if(store.getId() >= 10 && store.getId() < 100){
-            scdChar = "0" + Long.toString(store.getId());
-        }
-
-        String thdChar = "";
-        if(bobaTea.getTopping() == null) thdChar = "0";
-        else thdChar = "1";
-
-        String lstChar = "";
-        if(bobaTea.getId() < 10){
-            lstChar = "00" + Long.toString(bobaTea.getId());
-        }
-        else if(bobaTea.getId() >= 10 && bobaTea.getId() < 100){
-            lstChar = "0" + Long.toString(bobaTea.getId());
-        }
-
-        String code = fstChar + scdChar + thdChar + lstChar;
-
-        storeBoba.setProductionCode(code);
-        storeBobaService.addStoreBoba(storeBoba);
-
-        model.addAttribute("storeName", store.getName());
-        model.addAttribute("listStoreBoba", listStoreBoba);
+        model.addAttribute("boba", bobaTeaList);
+        model.addAttribute("store", store);
+        model.addAttribute("listOfBoba", bobaTeaList);
+        model.addAttribute("storeBobaTea", store.getListStoreBoba());
 
         return "assign-bobatea";
+
     }
 
 }
